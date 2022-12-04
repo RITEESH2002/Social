@@ -1,0 +1,89 @@
+.gpt3__whatgpt3 {
+  display: flex;
+  flex-direction: column;
+
+  padding: 2rem;
+  background: var(--color-footer);
+
+  /* ff 3.6+ */
+  background:-moz-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+  /* safari 5.1+,chrome 10+ */
+  background:-webkit-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+  /* opera 11.10+ */
+  background:-o-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+  /* ie 10+ */
+  background:-ms-radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+  /* global 92%+ browsers support */
+  background:radial-gradient(circle at 30% -100%, #042c54 25%, rgba(4, 44, 84, 1) 85%, rgba(27, 120, 222, 1) 100%);
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.gpt3__header-content__input {
+  width: 100%;
+  margin: 1rem 0 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+.gpt3__header-content__input input {
+  /* flex: 2; */
+  width: 100%;
+  min-height: 50px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+  background: var(--color-footer);
+  border: 2px solid var(--color-footer);
+  padding: 0 1rem;
+  outline: none;
+  color: #fff;
+  margin-bottom: 1rem;
+  
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.gpt3__header-content__input button {
+  margin-top: 1rem;
+  flex: 0.6;
+  width: 40%;
+  min-height: 50px;
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+  border:none;
+  background: lightblue;
+  padding: 0 1rem;
+  color: #000;
+  cursor: pointer;
+  outline: none;
+
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.gpt3__whatgpt3-feature{
+  margin-bottom: 1rem;
+}
+
+textarea{
+  resize: none;
+  background-color: var(--color-footer);/* This ruins default border */
+  border: 1px solid #888;
+  width: 100%;
+  padding: 1rem;
+  color: white;
+  font-size: 18px;
+  outline: none;
+  border: none;
+}
+
+textarea::placeholder{
+  font-size:18px;
+}
