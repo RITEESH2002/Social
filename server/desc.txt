@@ -1,0 +1,16 @@
+In index.js , using app.use the paths are specified for the url
+const userRoute = require('./routes/users.js')
+app.use("/api/users", userRoute)
+
+And respective routes are connected (auth, users)
+
+In auth route LOGIN and REGISTER is managed using User model(schema)
+In users route Follow, Unfollow, Update, Delete, Get user is managed using User model
+
+const User = require("../models/User")
+const router = require('express').Router();
+
+then route.get | put | delete are used to perform actions
+
+$push $pull : While like dislike or follow unfollow
+$set : While updating user or post
