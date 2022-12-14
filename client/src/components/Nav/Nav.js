@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import './Nav.css'
+import { NavLink } from "react-router-dom";
 import VConnectfinal from '../../VConnectfinal.svg'
 // BEM = Block Element Modifier
 
@@ -11,8 +12,8 @@ const Nav = () => {
     <div className="gpt3__navbar">
       <div className="gpt3__navbar-links">
         <div className="gpt3__navbar-links_logo">
-          <a href="#home"><img style={{height:50, width:200}} src={VConnectfinal
-          } alt="logo"/></a>
+          <img style={{height:50, width:200}} src={VConnectfinal
+          } alt="logo"/>
         </div>
         <div className="gpt3__navbar-links_container">
           <p><a href="#home">Home</a></p>
@@ -23,8 +24,12 @@ const Nav = () => {
         </div>
       </div>
       <div className="gpt3__navbar-sign">
-       <button type="button">Sign In</button>
+      <NavLink to="/login">
+        <button type="button">Sign in</button>
+      </NavLink>
+      <NavLink to="/register">
         <button type="button">Sign up</button>
+      </NavLink>
       </div>
       <div className="gpt3__navbar-menu">
         {toggleMenu
@@ -40,7 +45,7 @@ const Nav = () => {
             <p><a href="#find">FindUs</a></p>
           </div>
           <div className="gpt3__navbar-menu_container-links-sign">
-            <p>Sign in</p>
+            <button type="button">Sign in</button>
             <button type="button">Sign up</button>
           </div>
         </div>

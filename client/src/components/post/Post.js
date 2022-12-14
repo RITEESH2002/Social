@@ -1,34 +1,64 @@
-import React from 'react'
+import React, { useContext, useEffect } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
-import { Users } from "../../dummyData";
+// import { Users } from "../../dummyData";
 import { useState } from "react";
-import like1 from "../../assets/like.png"
-import user1 from "../../assets/user/1.jpeg"
-import heart from "../../assets/heart.png"
-import posts from "../../assets/post/8.jpeg"
-export default function Post({ post }) {
-  const [like,setLike] = useState(post.like)
-  const [isLiked,setIsLiked] = useState(false)
+import { format } from "timeago.js";
 
-  const likeHandler =()=>{
-    setLike(isLiked ? like-1 : like+1)
-    setIsLiked(!isLiked)
-  }
+import axios from "axios";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
+
+export default function Post({ post }) {
+  const [like, setLike] = useState(post.likes.length);
+  const [isLiked, setIsLiked] = useState(false);
+  const [user, setUser] = useState({});
+
+  const {user: currentUser} = useContext(AuthContext)
+
+  // console.log("HI")
+  // console.log (post)
+
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  useEffect(()=>{
+    setIsLiked(post.likes.includes(currentUser._id))
+  },[currentUser._id, post.likes])
+
+  const likeHandler = async () => {
+    await axios.put("/posts/"+post._id+"/like", {userId: currentUser._id})
+    setLike(isLiked ? like - 1 : like + 1);
+    setIsLiked(!isLiked);
+  };
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try{
+
+      }catch(err){
+        console.log(err)
+      }
+      const res = await axios.get(`/users?userId=${post.userId}`);
+      // console.log(res);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [post.userId]);
+  
   return (
     <div className="post">
       <div className="postWrapper">
         <div className="postTop">
           <div className="postTopLeft">
-            <img
-              className="postProfileImg"
-              src={user1}
-              alt=""
-            />
-            <span className="postUsername">
-              {Users.filter((u) => u.id === post?.userId)[0].username}
-            </span>
-            <span className="postDate">{post.date}</span>
+            <NavLink to = {`/profile/${user.username}`}>
+              <img
+                className="postProfileImg"
+                src={ user.profilePicture ? PF + user.profilePicture : PF + "user/blank.jpg"}
+                alt=""
+              />
+            </NavLink>
+            <span className="postUsername">{user.username}</span>
+            <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
             <MoreVert />
@@ -36,12 +66,22 @@ export default function Post({ post }) {
         </div>
         <div className="postCenter">
           <span className="postText">{post?.desc}</span>
-          <img className="postImg" src={posts} alt="" />
+          <img className="postImg" src={PF + post.img} alt="" />
         </div>
         <div className="postBottom">
           <div className="postBottomLeft">
-            <img className="likeIcon" src={like1} onClick={likeHandler} alt="" />
-            <img className="likeIcon" src={heart} onClick={likeHandler} alt="" />
+            <img
+              className="likeIcon"
+              src={`${PF}like.png`}
+              onClick={likeHandler}
+              alt=""
+            />
+            <img
+              className="likeIcon"
+              src={`${PF}heart.png`}
+              onClick={likeHandler}
+              alt=""
+            />
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">

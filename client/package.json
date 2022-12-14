@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@material-ui/core": "^4.12.4",
     "@mui/icons-material": "^5.10.16",
     "@mui/material": "^5.10.16",
     "@testing-library/jest-dom": "^5.16.5",
@@ -15,9 +16,11 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",
     "react-lottie": "^1.2.3",
+    "react-router-dom": "^6.4.4",
     "react-scripts": "5.0.1",
     "scss": "^0.2.4",
     "styled-components": "^5.3.6",
+    "timeago.js": "^4.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:8800/api"
 }
