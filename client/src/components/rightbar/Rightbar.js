@@ -86,8 +86,8 @@ const Rightbar = ({profile}) => {
             <span className="rightbarInfoValue">Mysore</span>
           </div>
           <div className="rightbarInfoItem">
-            <span className="rightbarInfoKey">Age:</span>
-            <span className="rightbarInfoValue">20</span>
+            <span className="rightbarInfoKey">Relationship Status:</span>
+            <span className="rightbarInfoValue">Single</span>
           </div>
         </div>
         <h4 className="rightbarTitle">User friends</h4>

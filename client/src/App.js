@@ -21,18 +21,18 @@ const AppContainer = styled.div`
 const App = () => {
   return (
     <div className="App">
-       {/* <div className="grad_bg">  */}
-          {/* <Nav /> */}
-          {/* <Header />
+       <div className="grad_bg"> 
+          <Nav />
+          <Header />
        </div>
        <About />
        <Use />
        <Contact />
-       <Find /> */}
-      {/* <Login/>
-      <Register/> */}
+       <Find />
+      <Login/>
+      <Register/>
        <Home/>
-       {/* <Profile/> */}
+       <Profile/>
        
  
            {/* <AppContainer>

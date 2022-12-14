@@ -12,7 +12,8 @@ const Header = () => (
     </div>
     <div className="gpt3__header-content">
       <h1 className="gradient__text">Connecting You With The Digital Life</h1>
-      <p>Yet bed any for travelling assistance indulgence unpleasing. Not thoughts all exercise blessing. Indulgence way everything joy alteration boisterous the attachment. Party we years to order allow asked of.</p>
+      <p> <b>VConnect</b>  you with people across the globe with like-minded interests, and share thoughts, feelings, and insights online. 
+</p>
 
       {/* <div className="gpt3__header-content__input">
         <input type="email" placeholder="Your Email Address" />
