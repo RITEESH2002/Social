@@ -94,7 +94,8 @@
     /* outline: none; */
     width: 70%;
     background-color: var(--color-bg);
-
+    padding:10px;
+    color:white
 }
 .searchInput:focus{
     outline: none;
