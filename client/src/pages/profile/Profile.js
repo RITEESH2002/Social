@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Topbar from '../../components/topbar/Topbar'
 import Sidebar from '../../components/sidebar/Sidebar'
 import Feed from '../../components/feed/Feed'
 import Rightbar from '../../components/rightbar/Rightbar'
-import cover from "../../assets/user/2.jpg"
-import user from "../../assets/co1.png"
+// import cover from "../../assets/user/2.jpg"
+// import user from "../../../public/assets/user/1.jpeg"
 import "./Profile.css"
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
+
 function Profile() {
+  
+  const PF =  process.env.REACT_APP_PUBLIC_FOLDER
+  const [user, setUser] = useState({});
+  const params = useParams()
+
+  useEffect(()=>{
+    const fetchUser = async () => {
+      const res = await axios.get(`/users?username=${params.username}`)
+      setUser(res.data)
+    }
+    fetchUser();
+  },[params.username])
+
   return (
     <div style={{color:"white"}}>
       <Topbar/>
@@ -15,22 +31,22 @@ function Profile() {
       <div className="profileRight">
         <div className="profileRightTop">
             <div className="profileCover">
-                <img src={user} alt="username" className="profileCoverImg" />
-                <img src={cover} alt="" className="profileUserImg" />
+                <img src={user.coverPicture || PF+"user/No_Cover.jpg"} alt="username" className="profileCoverImg" />
+                <img src={user.profilePicture || PF+"user/blank.jpg"} alt="" className="profileUserImg" />
             </div>
             <div className="profileInfo">
                 <h5 className="profileInfoName">
-                    MY_NAME
+                    {user.username}
                 </h5>
                 <span className='profileInfoDesc'>
-                 <span className="profileInfoName1">About Me:-</span>
-                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Labore quia voluptatibus incidunt praesentium non fuga nesciunt iure exercitationem! Excepturi vel veniam vitae enim similique quasi cumque porro sunt voluptatum incidunt.
+                 
+                    {user.desc}
                 </span>
             </div>
         </div>
         <div className="profileRightBottom">
-        <Feed/>
-      <Rightbar profile/>
+        <Feed username={params.username}/>
+      <Rightbar user = {user}/>
         </div>
       </div>
     </div>

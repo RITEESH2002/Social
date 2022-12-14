@@ -66,6 +66,10 @@
       font-weight: 500;
       cursor: pointer;
   }
+
+  .loginButton:disabled{
+    cursor: not-allowed
+  }
   
   .loginForgot{
       text-align: center;
@@ -84,3 +88,4 @@
       font-weight: 500;
       cursor: pointer;
   }
+

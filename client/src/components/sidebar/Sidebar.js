@@ -1,6 +1,7 @@
 import React from 'react'
 import "./Sidebar.css"
-import user1 from "../../assets/blog02.png"
+import { NavLink } from 'react-router-dom';
+// import user1 from "../../assets/blog02.png"
 import {
     RssFeed,
     ThreePRounded,
@@ -15,6 +16,8 @@ import {
   } from '@mui/icons-material';
 //   import Diversity1Icon from '@mui/icons-material/Diversity1';
 const Sidebar = () => {
+  const PF =  process.env.REACT_APP_PUBLIC_FOLDER
+
   return (
     <div className="sidebar">
     <div className="sidebarWrapper">
@@ -31,10 +34,13 @@ const Sidebar = () => {
           <PlayCircleFilledOutlined className="sidebarIcon" />
           <span className="sidebarListItemText">Videos</span>
         </li>
+        <NavLink to ="/news">
+
         <li className="sidebarListItem">
           <School className="sidebarIcon" />
           <span className="sidebarListItemText">News</span>
         </li>
+        </NavLink>
         <li className="sidebarListItem">
           <Group className="sidebarIcon" />
           <span className="sidebarListItemText">Groups</span>
@@ -64,23 +70,23 @@ const Sidebar = () => {
         <span className='sidebarListItemText'>Friends</span>
         </li>
             <li className="sidebarFriend">
-                <img src={user1} alt="Praveen" className="sidebarFriendImg" />
+                <img src={`${PF}ai.png`} alt="Praveen" className="sidebarFriendImg" />
                 <span className='sidebarFriendName'>Praveen</span>
             </li>
             <li className="sidebarFriend">
-                <img src={user1} alt="Riteesh_pai" className="sidebarFriendImg" />
+                <img src={`${PF}ai.png`} alt="Riteesh_pai" className="sidebarFriendImg" />
                 <span className='sidebarFriendName'>Riteesh_pai</span>
             </li>
             <li className="sidebarFriend">
-                <img src={user1} alt="ABC" className="sidebarFriendImg" />
+                <img src={`${PF}ai.png`} alt="ABC" className="sidebarFriendImg" />
                 <span className='sidebarFriendName'>ABC</span>
             </li>
             <li className="sidebarFriend">
-                <img src={user1} alt="XYZ" className="sidebarFriendImg" />
+                <img src={`${PF}ai.png`} alt="XYZ" className="sidebarFriendImg" />
                 <span className='sidebarFriendName'>XYZ</span>
             </li>
             <li className="sidebarFriend">
-                <img src={user1} alt="CBD" className="sidebarFriendImg" />
+                <img src={`${PF}ai.png`} alt="CBD" className="sidebarFriendImg" />
                 <span className='sidebarFriendName'>CBD</span>
             </li>
         </ul>

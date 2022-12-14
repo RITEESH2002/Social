@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const User = require("../models/User")
 const bcrypt = require('bcrypt')
-// bycrypt is used to hash password 
+
 // REGISTER
 router.post("/register", async (req, res)=> {
   

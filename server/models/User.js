@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-// Schema represents the structure of the document default values 
-//required min,max is all validator in built
-// required islike not null
 
 const UserSchema = new mongoose.Schema({
   username:{
@@ -30,7 +27,6 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: ""
   },
-  //followers can be more than one so its array
   followers: {
     type: Array,
     default: []
@@ -63,6 +59,5 @@ const UserSchema = new mongoose.Schema({
 },
 {timestamps: true}
 )
-// creates a validator and checks if the value is given in an array -> enum 
-// timestamps why its used ->  it stores current time of the database created and when its updated 
+
 module.exports = mongoose.model("User", UserSchema)

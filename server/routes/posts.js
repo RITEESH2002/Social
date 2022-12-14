@@ -83,10 +83,10 @@ router.get("/:id", async(req,res)=>{
 
 
 //get timeline posts
-router.get("/timeline/all" , async(req,res)=>{
+router.get("/timeline/:userId" , async(req,res)=>{
   try{
     //SAY RITEESH follows PRAVEEN
-    const currentUser = await User.findById(req.body.userId) //RITEESH
+    const currentUser = await User.findById(req.params.userId) //RITEESH
     const userPosts = await Post.find({userId : currentUser._id}) //RITEESH's posts
     const friendPosts = await Promise.all
     // Promise used because looping has to be done resulting in callback hell
@@ -98,6 +98,20 @@ router.get("/timeline/all" , async(req,res)=>{
     )
     //All posts of following of Riteesh (here praveen only)
     res.status(200).json(userPosts.concat(...friendPosts))
+  }catch(err){
+    res.status(500).json(err)
+  }
+})
+
+//get user's posts
+router.get("/profile/:username" , async(req,res)=>{
+  try{
+    //SAY RITEESH follows PRAVEEN
+    const user = await User.findOne({username : req.params.username}) //RITEESH
+    const posts = await Post.find({userId : user._id}) //RITEESH's posts
+   
+    //All posts of following of Riteesh
+    res.status(200).json(posts)
   }catch(err){
     res.status(500).json(err)
   }

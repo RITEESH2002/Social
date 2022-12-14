@@ -8,18 +8,11 @@ const userRoute = require('./routes/users.js')
 const authRoute = require('./routes/auth.js')
 const bodyParser = require("body-parser")
 const postRoute = require("./routes/posts")
-
-//use of mongoose-> its used to connect to server and create mongodb database 
-//express-> its node.js framework used to run server
-//helmet -> after making requests to server makes the server secure {avoiding vulnarable head requests}
-//dotenv -> security to some info
-//morgan -> logging functionality how request is sent how much is responded 
-
+const multer = require("multer")
 
 dotenv.config();
 
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true}, ()=>{
-  // useNewUrlParser it helps user to get back to old server if new server page has any error by default its false 
   console.log("Connected to MONGO")
 })
 
@@ -41,9 +34,35 @@ app.use(morgan("common"))
 //   res.send("welcome to Userspage")
 // })
 
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images");
+  },
+  // destination is used to determine within which folder the uploaded files should be stored.
+  
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+  // filename is used to determine what the file should be named inside the folder. 
+})
+
+const upload = multer({storage});
+
+//The app.post() function routes the HTTP POST requests to the specified path with the specified callback functions.\
+// app.post(path, callback [, callback ...])
+
+app.post("/api/upload", upload.single("file"), (req, res)=>{
+  try{
+    return res.status(200).json("Uploaded successfully") 
+  }catch(err){
+    console.log(err)
+  }
+})
+
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)
 app.use("/api/posts", postRoute)
+
 app.listen(8800, ()=>{
   console.log("Backend Server is ready!")
 })
