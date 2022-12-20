@@ -26,10 +26,14 @@ const Sidebar = () => {
           <RssFeed className="sidebarIcon" />
           <span className="sidebarListItemText">Feed</span>
         </li>
+        <NavLink to ="/messenger">
+
         <li className="sidebarListItem">
           <ThreePRounded className="sidebarIcon" />
           <span className="sidebarListItemText">Chats</span>
         </li>
+
+        </NavLink>
         {/* <li className="sidebarListItem">
           <PlayCircleFilledOutlined className="sidebarIcon" />
           <span className="sidebarListItemText">Videos</span>

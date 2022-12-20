@@ -2,6 +2,7 @@ import React from 'react'
 import NewsCard from './NewsCard/NewsCard'
 import {Grow,Grid,Typography} from "@material-ui/core"
 import useStyles from "./styles"
+
 //makestyles creates hook(just function part which is reusable) called usestyles 
 
 const infoCards = [
@@ -18,6 +19,10 @@ const NewsCards = ({articles,activeArticle}) => {
   if(!articles.length)
   {
     return (
+      <>
+
+        
+ 
       <Grow in>
         <Grid className={classes.container} container alignItems='stretch' spacng={3}>
 
@@ -43,6 +48,7 @@ const NewsCards = ({articles,activeArticle}) => {
           ))}
         </Grid>
       </Grow>
+      </>
     )
   }
   return (

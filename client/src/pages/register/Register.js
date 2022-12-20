@@ -1,9 +1,9 @@
 import React, { useRef } from "react";
 import "./Register.css";
-import logo from "../../VConnectfinal.svg";
+// import logo from "../../VConnectfinal.svg";
 import Reg from "../../lottie/Reg";
 import axios from "axios";
-import {Navigate, useNavigate} from "react-router-dom"
+import { useNavigate} from "react-router-dom"
 
 export default function Register() {
   const navigate = useNavigate()

@@ -1,0 +1,34 @@
+.conv{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    cursor: pointer;
+   
+    /* background-color: bisque; */
+}
+.conv:hover{
+    background-color: rgb(32, 36, 84);
+    border-radius: 10px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+
+.convimg{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin-top: 10px;
+    margin-right: 20px;
+    object-fit: cover;
+    border: 1px solid gray;
+}
+.convname{
+    font: 20px;
+    font-weight: bold;
+}
+@media screen and (max-width: 768px) {
+    .convname {
+      display: none;
+    }
+  }
