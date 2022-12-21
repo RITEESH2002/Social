@@ -1,0 +1,111 @@
+.messenger{
+    background-color:var(--color-bg);
+    height:100vh;
+    display: flex;
+    margin-top: 10px;
+   
+}
+.chatmenu{
+flex:2.5;
+border-right: .5px solid gray;
+}
+.chatbox{
+flex:6.5;
+border-right: .5px solid gray;
+}
+.chatonl{
+flex:3;
+}
+.menuwrap,.chatwrap,.onlwrap{
+    padding: 10;
+    height: 100%;
+    /* background-color:antiquewhite; */
+}
+.search{
+    margin-top: 10px;
+    background-color: transparent;
+    /* border: none; */
+    border: 1px solid gray;
+    border-radius: 5px;
+   
+    /* border-style: none; */
+    outline: none;
+    padding: 7px 40px;
+    color: white;
+    margin-left: 6px;
+
+}
+.chatwrap{
+    /* height: 100%; */
+    display: flex;
+    flex-direction: column;
+   
+    position: relative;
+}
+/* .chatwrap::-webkit-scrollbar{
+    display: none;
+} */
+.chattop{
+    height: 100%;
+    /* overflow-y: scroll; */
+    padding: 10px;
+}
+.chattop::-webkit-scrollbar{
+    display: none;
+}
+.chatbot{
+    border-top: 1px solid gray;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+    align-items: center;
+    
+}
+.type{
+    margin-top: 10px;
+    padding: 6px 20px;
+    background-color: transparent;
+    outline: none;
+    border: 1px solid gray;
+    /* flex: 1; */
+    width: 450px;
+    border-radius: 10px;
+    color: white;
+    /* position: fixed; */
+}
+.send{
+    /* padding: 3px 30px; */
+    background-color: transparent;
+    outline: none;
+    width: 70px;
+    height: 40px;
+    border: 1px solid gray;
+    color: white;
+    /* width: 100px; */
+
+    margin-left: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.send:hover{
+    transform: scale(1.01);
+}
+
+@media screen and (max-width: 768px) {
+    .chatmenu {
+      flex: 1;
+    }
+  
+    .search {
+      display: none;
+    }
+  
+    .chatbox{
+      flex: 10;
+    }
+  
+    .chatonl{
+      flex: 1px;
+    }
+  }

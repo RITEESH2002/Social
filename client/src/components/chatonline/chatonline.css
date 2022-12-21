@@ -1,0 +1,45 @@
+.chatOnline{
+    margin-left: 10px;
+}
+.chatOnlineFriend {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+}
+/* .chatOnlineFriend:hover{
+    background-color: rgb(32, 36, 84);
+    border-radius: 10px;
+    transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+   */
+  .img{
+    position: relative;
+    margin-right: 10px;
+  }
+  
+  .imageuser {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid white;
+  }
+  
+  .userbadge {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(54, 166, 54);
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    border:1px solid gray;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .name {
+      display: none;
+    }
+  }

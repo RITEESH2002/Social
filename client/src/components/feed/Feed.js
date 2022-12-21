@@ -3,7 +3,7 @@ import "./Feed.css"
 import Share from '../share/Share'
 import Post from '../post/Post'
 import axios from 'axios'
-import { Posts } from '../../dummyData'
+// import { Posts } from '../../dummyData'
 import { AuthContext } from '../../context/AuthContext'
 const Feed = ({username}) => {
 

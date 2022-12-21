@@ -36,7 +36,19 @@ function Topbar() {
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
+       
+
+        
+
+<NavLink to ="/">
+
+
             <span className="topbarLink">Homepage</span>
+</NavLink>
+    
+
+    
+
             <span className="topbarLink">Timeline</span>
           </div>
           <div className="topbarIcons">

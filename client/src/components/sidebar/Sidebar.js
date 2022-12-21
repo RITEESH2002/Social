@@ -26,14 +26,18 @@ const Sidebar = () => {
           <RssFeed className="sidebarIcon" />
           <span className="sidebarListItemText">Feed</span>
         </li>
+        <NavLink to ="/messenger">
+
         <li className="sidebarListItem">
           <ThreePRounded className="sidebarIcon" />
           <span className="sidebarListItemText">Chats</span>
         </li>
-        <li className="sidebarListItem">
+
+        </NavLink>
+        {/* <li className="sidebarListItem">
           <PlayCircleFilledOutlined className="sidebarIcon" />
           <span className="sidebarListItemText">Videos</span>
-        </li>
+        </li> */}
         <NavLink to ="/news">
 
         <li className="sidebarListItem">
@@ -41,7 +45,7 @@ const Sidebar = () => {
           <span className="sidebarListItemText">News</span>
         </li>
         </NavLink>
-        <li className="sidebarListItem">
+        {/* <li className="sidebarListItem">
           <Group className="sidebarIcon" />
           <span className="sidebarListItemText">Groups</span>
         </li>
@@ -60,7 +64,7 @@ const Sidebar = () => {
         <li className="sidebarListItem">
           <Event className="sidebarIcon" />
           <span className="sidebarListItemText">Events</span>
-        </li>
+        </li> */}
       </ul>
       <button className="sidebarButton">Show More</button>
       <hr className="sidebarHr" />
