@@ -52,7 +52,7 @@ const App = () => {
             <Route exact path="/" element={user ? <Home/> : <Starting />} />
             <Route path="/register" element={user ?  <Navigate to="/"/> : <Register />} />
             
-            <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+            <Route path="/login" element={user ? <Navigate to="/"/> : <Login />} />
             {/* <Route path="/home" element={user ? <Home/> : <Starting/>} /> */}
             <Route path="/messenger" element={!user ? <Navigate to="/" /> : <Messenger/>} />
             <Route path="/profile/:username" element={user ? <Profile/> : <Starting/>} />

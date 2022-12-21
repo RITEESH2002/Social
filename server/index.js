@@ -9,6 +9,7 @@ const authRoute = require('./routes/auth.js')
 const bodyParser = require("body-parser")
 const postRoute = require("./routes/posts")
 const multer = require("multer")
+const path = require("path");
 
 dotenv.config();
 
@@ -22,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //middleware : have access to the request object ( req ), the response object ( res ), and the next middleware function in the application's request-response cycle
 app.use(express.json())
 // It parses incoming requests with JSON payloads
-app.use(helmet())
+app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 // js module that helps in securing HTTP headers
 app.use(morgan("common"))
 // to log HTTP requests and errors, and simplifies the process
@@ -34,6 +35,8 @@ app.use(morgan("common"))
 //   res.send("welcome to Userspage")
 // })
 
+app.use("/images", express.static(path.join(__dirname, "public/images")))
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "public/images");
@@ -41,7 +44,7 @@ const storage = multer.diskStorage({
   // destination is used to determine within which folder the uploaded files should be stored.
   
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, req.body.name);
   }
   // filename is used to determine what the file should be named inside the folder. 
 })
