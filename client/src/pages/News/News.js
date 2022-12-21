@@ -74,7 +74,7 @@ const classes=useStyles();
   // const alanbtnConatiner=useRef();
   // useAlan();
 
-if(location.pathname!=="/news")return null;
+
   return (
     <>
  
