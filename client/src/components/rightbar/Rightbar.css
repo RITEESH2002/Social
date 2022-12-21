@@ -81,7 +81,8 @@
   
   .rightbarFollowing{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    align-items: center;
     margin-bottom: 20px;
     cursor: pointer;
   }
@@ -95,7 +96,7 @@
   }
   .rightbarFollowingName{
     margin-top: 5px;
-    margin-left: 10px;
+    margin-left: 20px;
   }
   .rightbarFriendList{
     padding: 0;
@@ -133,4 +134,19 @@
     font-weight: 600;
     
 
+  }
+
+  .rightbarFollowButton{
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border: none;
+    background-color: #1973f4;
+    color: white;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
   }
