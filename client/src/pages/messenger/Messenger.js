@@ -10,6 +10,8 @@ import logo from "../../VConnectfinal.svg";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
+import {io} from "socket.io-client"
+
 function Messenger() {
   const [conversation, setConversation] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -17,6 +19,18 @@ function Messenger() {
   const [newMessage, setNewMessage] = useState("");
   const { user } = useContext(AuthContext);
   const scrollRef = useRef();
+
+  const  [socket, setSocket] = useState(null)
+
+  useEffect(()=>{
+    setSocket(io("ws://localhost:8900"))
+  }, [])
+
+  useEffect(()=>{
+    socket?.on("welcome", message=>{
+      console.log(message)
+    })
+  },[socket])
 
   useEffect(() => {
     const getConversations = async () => {
