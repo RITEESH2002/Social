@@ -85,4 +85,26 @@
     margin-top: 19px;
   }
  
-  
+  @media screen and (max-width:480px)
+  {
+    .sidebar{
+      display: none;
+    }
+  }
+  @media screen and (min-width:481px) and (max-width:810px)
+  {
+    .sidebar{
+      display: none;
+    }
+  }
+
+
+  @media screen and (min-width:769px) and (max-width:1025px)
+  {
+    .sidebarWrapper{
+      padding: 0px;
+    }
+    /* .sidebarListItemText{
+      display: none;
+    } */
+  }

@@ -9,3 +9,15 @@
 .feedWrapper{
     padding: 20px;
 }
+
+@media screen and (max-width:420px) {
+    .feed{
+        flex:8;
+    }
+}
+@media screen and (min-width:811px) and (max-width:1025px)
+  {
+    .feed{
+     flex: 7.8;
+    }
+  }

@@ -8,6 +8,9 @@ import Rightbar from '../../components/rightbar/Rightbar'
 import "./Profile.css"
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 function Profile() {
   
@@ -24,6 +27,10 @@ function Profile() {
   },[params.username])
 
   return (
+   <>
+
+
+
     <div style={{color:"white"}}>
       <Topbar/>
       <div className="profile">
@@ -44,13 +51,14 @@ function Profile() {
                 </span>
             </div>
         </div>
-        <div className="profileRightBottom">
-        <Feed username={params.username}/>
-      <Rightbar user = {user}/>
+         <div className="profileRightBottom">
+         <Feed username={params.username}/>
+         <Rightbar user={user}/>
         </div>
       </div>
     </div>
     </div>
+   </>
   )
 }
 

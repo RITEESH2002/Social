@@ -53,6 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: row;
   }
   
   .shareOptions{
@@ -65,6 +66,7 @@
       align-items: center;
       margin-right: 15px;
       cursor: pointer;
+      flex-direction: row;
   }
   
   .shareIcon{
@@ -75,6 +77,7 @@
   .shareOptionText{
       font-size: 14px;
       font-weight: 500;
+      color: white;
   }
   
   .shareButton{
@@ -107,4 +110,9 @@
     right: 20px;
     cursor: pointer;
     opacity: 0.7;
+  }
+  @media screen and (max-width:479px){
+    .shareBottom{
+      flex-direction: column;
+    }
   }

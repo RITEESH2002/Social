@@ -9,6 +9,7 @@ import Lotties from "../../lottie/Lotties";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Add, Remove } from "@mui/icons-material";
+import Update from "../Update/Update";
 const Rightbar = ({ user }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const {user:currentUser, dispatch} = useContext(AuthContext)
@@ -16,7 +17,7 @@ const Rightbar = ({ user }) => {
   const [friends, setFriends] = useState([])
 
   const [followed, setFollowed] = useState(currentUser.following.includes(user?.id))
-
+  const[upadted,setupdated]=useState(false);
 
   useEffect(()=>{
     const getFriends = async () => {
@@ -50,6 +51,10 @@ const Rightbar = ({ user }) => {
     setFollowed(!followed)
   }
 
+  const logout=()=>{
+    localStorage.clear();
+    window.location.href="/";
+  }
   const HomeRightBar = () => {
     return (
       <>
@@ -143,6 +148,9 @@ const Rightbar = ({ user }) => {
           {followed ? <Remove/> : <Add/>}
         </button>
       )}
+      <div className="cont">
+
+
         <h4 className="rightbarTitle">User information</h4>
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
@@ -163,7 +171,28 @@ const Rightbar = ({ user }) => {
                 : "-"}
             </span>
           </div>
+          {user.username === currentUser.username && (
+        <button className="rightbarFollowButton" onClick={()=>setupdated(true)}>
+      Update
+         
+        </button>
+      )}
+
+      {user.username === currentUser.username && (
+        <button className="rightbarFollowButton" onClick={logout}>
+      Logout
+         
+        </button>
+      )}
         </div>
+        
+          {
+            upadted && <Update setOpenUpdate={setupdated} user={user} />
+            
+            }
+
+        
+      </div>
         <h4 className="rightbarTitle">User friends</h4>
         {friends.map(friend=>(
           <NavLink to={"/profile/"+ friend.username}>

@@ -100,3 +100,25 @@
 .searchInput:focus{
     outline: none;
 }
+
+@media screen and (max-width:480px) {
+    .topbarLink{
+        display: none;
+    }
+    .topbarIconItem{
+        display: none;
+    }
+    .searchInput{
+        display: none;
+    }
+}
+
+@media screen and (min-width:481px) and (max-width:768px)
+{
+    .searchInput{
+       width:20px;
+    }
+    .topbarLink{
+        display: none;
+    }
+}

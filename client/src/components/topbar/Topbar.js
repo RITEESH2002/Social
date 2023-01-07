@@ -12,7 +12,7 @@ import { AuthContext } from "../../context/AuthContext";
 function Topbar() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+ 
   return (
     <>
       <div className="topbarContainer">
@@ -31,7 +31,7 @@ function Topbar() {
                 marginLeft: "10px",
               }}
             />
-            <input placeholder="search..." className="searchInput" />
+            <input placeholder="search..." className="searchInput"  />
           </div>
         </div>
         <div className="topbarRight">
