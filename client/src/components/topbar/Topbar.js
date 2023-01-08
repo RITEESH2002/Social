@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Topbar.css";
 import SearchIcon from "@mui/icons-material/Search";
 import PersonIcon from "@mui/icons-material/Person";
@@ -8,10 +8,23 @@ import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
 import logo from "../../VConnectfinal.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
+import axios from "axios";
 
 function Topbar() {
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const [searchUser, setSearchUser] = useState("");
+  const handleKeyPress = async (event) => {
+    if (event.key === "Enter") {
+      console.log(searchUser);
+      try{
+        const res = await axios("/users?username=" + searchUser);
+        setSearchUser(res.data);
+      }catch(e){
+        console.log(e)
+      }
+    }
+  };
 
   return (
     <>
@@ -31,23 +44,29 @@ function Topbar() {
                 marginLeft: "10px",
               }}
             />
-            <input placeholder="search..." className="searchInput" />
+            <input
+              placeholder="search..."
+              className="searchInput"
+              onChange={(e) => setSearchUser(e.target.value)}
+              // value={searchUser}
+              onKeyDown={handleKeyPress}
+            />
           </div>
+          {searchUser ? (
+            <div className="divi">
+            <NavLink to = {`/profile/${searchUser.username}`}>
+              <div className="searchText">{searchUser.username}</div>
+              </NavLink>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
         <div className="topbarRight">
           <div className="topbarLinks">
-       
-
-        
-
-<NavLink to ="/">
-
-
-            <span className="topbarLink">Homepage</span>
-</NavLink>
-    
-
-    
+            <NavLink to="/">
+              <span className="topbarLink">Homepage</span>
+            </NavLink>
 
             <span className="topbarLink">Timeline</span>
           </div>
