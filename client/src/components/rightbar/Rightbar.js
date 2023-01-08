@@ -22,7 +22,7 @@ const Rightbar = ({ user }) => {
   useEffect(()=>{
     const getFriends = async () => {
       try{
-        const friendList = await axios.get("/users/friends/"+ user.id);
+        const friendList = await axios.get("/users/friends/"+ user._id);
         setFriends(friendList.data)
       }catch(err){
         console.log(err)
@@ -52,8 +52,15 @@ const Rightbar = ({ user }) => {
   }
 
   const logout=()=>{
+    let text;
+  if (window.confirm("Do you want to Logout!") == true) {
     localStorage.clear();
     window.location.href="/";
+    text="Logging you out"
+  
+} else {
+  text = "";
+}
   }
   const HomeRightBar = () => {
     return (
@@ -171,9 +178,12 @@ const Rightbar = ({ user }) => {
                 : "-"}
             </span>
           </div>
+          <div className="up" style={{display:"flex",alignItems:"center",gap:"3.5rem"}}>
+
+
           {user.username === currentUser.username && (
         <button className="rightbarFollowButton" onClick={()=>setupdated(true)}>
-      Update
+          Update
          
         </button>
       )}
@@ -184,6 +194,7 @@ const Rightbar = ({ user }) => {
          
         </button>
       )}
+          </div>
         </div>
         
           {

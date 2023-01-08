@@ -4,16 +4,16 @@ import { MoreVert } from "@mui/icons-material";
 // import { Users } from "../../dummyData";
 import { useState } from "react";
 import { format } from "timeago.js";
-
+import Comment from "../Comment/Comment";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
 export default function Post({ post }) {
+  const[com,setcom]=useState(false);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
-
   const {user: currentUser} = useContext(AuthContext)
 
   // console.log("HI")
@@ -85,10 +85,13 @@ export default function Post({ post }) {
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText">{post.comment} comments</span>
+            <span className="postCommentText" onClick={()=>setcom(!com)}>{post.comment} comments</span>
           </div>
         </div>
       </div>
+      {
+        com && <Comment/>
+      }
     </div>
   );
 }

@@ -100,8 +100,117 @@
 .searchInput:focus{
     outline: none;
 }
+.gpt3__navbar-menu {
+    margin-left: 1rem;
 
-@media screen and (max-width:480px) {
+    display: none;
+    position: relative;
+}
+.gpt3__navbar-menu_container p {
+    color: #fff;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    text-transform: capitalize;
+
+    margin: 0 1rem;
+    cursor: pointer;
+}
+.gpt3__navbar-menu_container button {
+    padding: 0.5rem 1rem;
+    color: #000;
+    background: lightblue;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 25px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right:5px
+}
+.gpt3__navbar-menu_container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    
+    text-align: end;
+    background: var(--color-footer);
+    padding: 2rem;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    margin-top: 1rem;
+    min-width: 210px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0,0, 0,0.2);
+    z-index:1000;
+    background-color: var(--color-bg)
+}
+
+.gpt3__navbar-menu_container p {
+    margin: 1rem 0;
+}
+
+.gpt3__navbar-menu_container-links-sign {
+    display: none;
+}
+
+@media screen and (max-width: 1050px) {
+    .gpt3__navbar-links_container {
+        display: none;
+    }
+
+    .gpt3__navbar-menu {
+        display: flex;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .topbarRight {
+        padding: 2rem 4rem;
+    }
+    .topbarIcons,.topbarLink{
+        display: none;
+    }
+  
+}
+
+@media screen and (max-width: 550px) {
+    .topbarRight {
+        padding: 2rem;
+    }
+
+    .gpt3__navbar-sign {
+        display: none;
+    }
+
+    .gpt3__navbar-menu_container {
+        top: 20px;
+    }
+
+    .gpt3__navbar-menu_container-links-sign {
+        display: block;
+        margin-top: 10px;
+    }
+    .topbarIcons,.topbarLink,.topbarImg{
+        display: none;
+    }
+    .topbarImgs{
+        width: 32px;
+    height: 32px;
+    filter: brightness(1.2);
+    border-radius: 50%;
+    object-fit: cover;
+    border: .5px solid white;
+    cursor: pointer;
+    }
+}
+
+ /* @media screen and (max-width:480px) {
     .topbarLink{
         display: none;
     }
@@ -121,4 +230,4 @@
     .topbarLink{
         display: none;
     }
-}
+}  */

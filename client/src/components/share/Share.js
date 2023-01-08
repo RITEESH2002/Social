@@ -2,6 +2,7 @@ import React, { useContext, useRef, useState } from "react";
 import "./Share.css";
 import { PermMedia, Sell, Room, AddReaction, Send, Cancel } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
+import { Navigate } from "react-router-dom";
 // import share from "../../assets/ai.png"
 import axios from "axios";
 const Share = () => {
