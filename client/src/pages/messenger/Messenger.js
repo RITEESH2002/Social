@@ -16,21 +16,52 @@ function Messenger() {
   const [conversation, setConversation] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
   const [messages, setMessages] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState([]);
   const { user } = useContext(AuthContext);
+  const socket = useRef();
   const scrollRef = useRef();
+  // const  [socket, setSocket] = useState(null)
 
-  const  [socket, setSocket] = useState(null)
+  // useEffect(()=>{
+  //   setSocket(io("ws://localhost:8900"))
+  // }, [])
 
-  useEffect(()=>{
-    setSocket(io("ws://localhost:8900"))
-  }, [])
+useEffect(()=>{
+  socket.current=io("ws://localhost:8900");
+  socket.current.on("getMessage", (data) => {
+    setArrivalMessage({
+      sender: data.senderId,
+      text: data.text,
+      createdAt: Date.now(),
+    }) ;
+  });
+},[]);
 
-  useEffect(()=>{
-    socket?.on("welcome", message=>{
-      console.log(message)
-    })
-  },[socket])
+
+useEffect(() => {
+  arrivalMessage &&
+    currentChat?.members.includes(arrivalMessage.sender) &&
+    setMessages((prev) => [...prev, arrivalMessage]);
+}, [arrivalMessage, currentChat]);
+
+
+useEffect(()=>{
+  socket.current.emit("addUser",user._id);
+  socket.current.on("getUsers",(users)=>{
+    setOnlineUsers(
+      user.following.filter((f) => users.some((u) => u.userId === f))
+    );
+  });
+},[user])
+
+
+  // useEffect(()=>{
+  //   socket?.on("welcome", message=>{
+  //     console.log(message)
+  //   })
+  // },[socket])
 
   useEffect(() => {
     const getConversations = async () => {
@@ -65,6 +96,17 @@ function Messenger() {
       text: newMessage,
       conversationId: currentChat._id,
     }
+
+    const receiverId = currentChat.members.find(
+      (member) => member !== user._id
+    );
+ 
+    socket.current.emit("sendMessage", {
+      senderId: user._id,
+      receiverId,
+      text: newMessage,
+    });
+
     try{
       const res = await axios.post("/messages", message);
       setMessages([...messages, res.data])
@@ -162,11 +204,8 @@ function Messenger() {
         </div>
         <div className="chatonl">
           <div className="onlwrap" style={{ color: "white" }}>
-            <Chatonline />
-            <Chatonline />
-            <Chatonline />
-            <Chatonline />
-            <Chatonline />
+            <Chatonline onlineUsers={onlineUsers} currentId={user._id} setCurrentChat={setCurrentChat}/>
+            
           </div>
         </div>
       </div>
