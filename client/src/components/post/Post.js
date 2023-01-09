@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
+import DeleteIcon from '@material-ui/icons/Delete';
 // import { Users } from "../../dummyData";
 import { useState } from "react";
 import { format } from "timeago.js";
@@ -9,7 +10,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function Post({ post }) {
+export default function Post({ post, username }) {
   const[com,setcom]=useState(false);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -20,16 +21,24 @@ export default function Post({ post }) {
   // console.log (post)
 
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
-
+  
   useEffect(()=>{
     setIsLiked(post.likes.includes(currentUser._id))
   },[currentUser._id, post.likes])
-
+  
   const likeHandler = async () => {
     await axios.put("/posts/"+post._id+"/like", {userId: currentUser._id})
     setLike(isLiked ? like - 1 : like + 1);
     setIsLiked(!isLiked);
   };
+  const handleDelete= async ()=>{
+       console.log(post.userId, currentUser._id)
+     if (window.confirm("Do you want to Delete the post!") === true) {
+       
+         await axios.delete("/posts/"+post._id, {userId: currentUser._id})
+        // window.location.reload();
+       }
+   }
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -61,7 +70,11 @@ export default function Post({ post }) {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+          {
+            username ? 
+            <DeleteIcon style={{cursor: "pointer"}} onClick={handleDelete}/>:
+            <MoreVert /> 
+          }
           </div>
         </div>
         <div className="postCenter">
@@ -85,12 +98,12 @@ export default function Post({ post }) {
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText" onClick={()=>setcom(!com)}>{post.comment} comments</span>
+            {/* <span className="postCommentText" onClick={()=>setcom(!com)}>comments</span> */}
           </div>
         </div>
       </div>
       {
-        com && <Comment/>
+        com && <Comment />
       }
     </div>
   );

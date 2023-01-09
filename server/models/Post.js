@@ -17,8 +17,8 @@ const PostSchema = new mongoose.Schema({
     default: [],
   },
   comment:{
-    type:Array,
-    default:[],
+    type:Object,
+    default:{},
   }
 },
   { timestamps: true }

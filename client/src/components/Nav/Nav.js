@@ -45,8 +45,16 @@ const Nav = () => {
             <p><a href="#find">FindUs</a></p>
           </div>
           <div className="gpt3__navbar-menu_container-links-sign">
+          <NavLink to="/login">
+
             <button type="button" style={{marginBottom:"10px"}}>Sign in</button>
+          </NavLink>
+
+          <NavLink to="/register">
+
+
             <button type="button">Sign up</button>
+          </NavLink>
           </div>
         </div>
         )}
