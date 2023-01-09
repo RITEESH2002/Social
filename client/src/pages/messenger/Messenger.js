@@ -236,7 +236,11 @@ useEffect(()=>{
         </div>
         <div className="chatonl">
           <div className="onlwrap" style={{ color: "white" }}>
-            <Chatonline onlineUsers={onlineUsers} currentId={user._id} setCurrentChat={setCurrentChat}/>
+          <Chatonline
+              onlineUsers={onlineUsers}
+              currentId={user._id}
+              setCurrentChat={setCurrentChat}
+            />
             
           </div>
         </div>

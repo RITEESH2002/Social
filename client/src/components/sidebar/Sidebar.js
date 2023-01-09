@@ -2,6 +2,8 @@ import React from 'react'
 import "./Sidebar.css"
 import Lotties from "../../lottie/Lotties";
 import { NavLink } from 'react-router-dom';
+import Chatlo from "../../lottie/Chatlo"
+import Newslo from "../../lottie/Newslo"
 // import user1 from "../../assets/blog02.png"
 import {
     RssFeed,
@@ -27,9 +29,9 @@ const Sidebar = () => {
         <NavLink to ="/messenger">
 
         <li className="sidebarListItem">
-          <ThreePRounded className="sidebarIcon" />
-          <Lotties />
-          <span className="sidebarListItemText">Chats</span>
+        
+          <span className="sidebarListItemText">Chats➡️</span>
+          <Chatlo />
         </li>
 
         </NavLink>
@@ -38,9 +40,9 @@ const Sidebar = () => {
         <NavLink to ="/news">
 
         <li className="sidebarListItem">
-          <School className="sidebarIcon" />
-          <Lotties />
-          <span className="sidebarListItemText">News</span>
+          
+          <span className="sidebarListItemText">News➡️</span>
+          <Newslo />
         </li>
         </NavLink>
         

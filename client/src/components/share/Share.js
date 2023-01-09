@@ -69,7 +69,7 @@ const Share = () => {
           <div className="shareOptions">
             <label htmlFor="file" className="shareOption">
               <PermMedia htmlColor="lightblue" className="shareIcon" />
-              <span className="shareOptionText">Photo or Video</span>
+              <span className="shareOptionText">Photo</span>
               <input
                 style={{ display: "none" }}
                 type="file"
@@ -80,7 +80,7 @@ const Share = () => {
                 }}
               />
             </label>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <Sell htmlColor="green" className="shareIcon" />
               <span className="shareOptionText">Tag</span>
             </div>
@@ -91,7 +91,7 @@ const Share = () => {
             <div className="shareOption">
               <AddReaction htmlColor="yellow" className="shareIcon" />
               <span className="shareOptionText">Emoji's</span>
-            </div>
+            </div> */}
           </div>
           <button
             className="shareButton"
