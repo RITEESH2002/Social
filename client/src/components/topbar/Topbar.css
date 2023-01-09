@@ -232,3 +232,20 @@
         display: none;
     }
 }  */
+
+.divi{
+    position:absolute;
+    background-color:rgb(0,0,0);
+    height:40px;
+    top:50px;
+    width:40%;
+    padding:10px;
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+}
+
+.searchText{
+    margin-left: 10px;
+    color:white;
+}

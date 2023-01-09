@@ -1,22 +1,81 @@
-import { useState } from "react";
-
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Update.css";
 
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import axios from "axios";
 
 const Update = ({ setOpenUpdate, user }) => {
-  const [cover, setCover] = useState(null);
-  const [profile, setProfile] = useState(null);
-  const [texts, setTexts] = useState({
-    email: user.email,
-    password: user.password,
-    name: user.name,
-    city: user.city,
-    from: user.from,
-    relationship:user.relationship,
-    desc:user.desc,
-  });
+  const [cover, setCover] = useState("");
+  const [profile, setProfile] = useState("");
+  const [desc, setDesc] = useState(user.desc) 
+  const [name, setName] = useState(user.username) 
+  const [password, setPassword] = useState(user.password) 
+  const [passwordAgain, setPasswordAgain] = useState(user.password) 
+  const [city, setCity] = useState(user.city) 
+  const [from, setFrom] = useState(user.from) 
+  const [relationship, setRelationship] = useState(user.relationship) 
+  const email = user.email
+  const refe = useRef()
+  const navigate = useNavigate();
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+ 
+  const handleClick = async (e) => {
+    // e.preventDefault();
+    if(passwordAgain !== password){
+      refe.current.setCustomValidity("Passwords dont match!")
+    } else{
+      
+      const upd = {
+        userId: user._id,
+        // username : name,
+        // profilePicture: fileName1,
+        // coverPicture: fileName,
+        email : email,
+        password : password,
+        desc: desc,
+        city: city,
+        from: from,
+        relationship: relationship,
+      } ;
+      if (cover) {
+        const data = new FormData();
+        const fileName = Date.now() + cover.name;
+        // console.log(fileName)
+        data.append("name", fileName);
+        data.append("file", cover);
+        upd.coverPicture = fileName
+        
+        try {
+          await axios.post("/upload", data);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      if (profile) {
+        const data1 = new FormData();
+        const fileName1 = Date.now() + profile.name;
+        // console.log(fileName1)
+        data1.append("name", fileName1);
+        data1.append("file", profile);
+        upd.profilePicture = fileName1;
+      
+        try {
+          await axios.post("/upload", data1);
+        } catch (err) {
+          console.log(err);
+        }
+      }
+      try {
+        await axios.put("/users/"+ user._id, upd);
+        // window.location.reload()
+        // navigate('/home')
 
+      } catch(err) {
+        console.log(err)
+      }
+    }
+  };
 //   const upload = async (file) => {
 //     console.log(file)
 //     try {
@@ -29,9 +88,9 @@ const Update = ({ setOpenUpdate, user }) => {
 //     }
 //   };
 
-  const handleChange = (e) => {
-    setTexts((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
-  };
+  // const handleChange = (e) => {
+  // //   setTexts((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
+  // };
 
 // //   const queryClient = useQueryClient();
 
@@ -47,26 +106,29 @@ const Update = ({ setOpenUpdate, user }) => {
 //     }
 //   );
 
-  const handleClick = async (e) => {
-    e.preventDefault();
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
 
-    //TODO: find a better way to get image URL
+  //   //TODO: find a better way to get image URL
     
-    // let coverUrl;
-    // let profileUrl;
-    // coverUrl = cover ? await upload(cover) : user.coverPic;
-    // profileUrl = profile ? await upload(profile) : user.profilePic;
+  //   // let coverUrl;
+  //   // let profileUrl;
+  //   // coverUrl = cover ? await upload(cover) : user.coverPic;
+  //   // profileUrl = profile ? await upload(profile) : user.profilePic;
     
-    // mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
-    // setOpenUpdate(false);
-    // setCover(null);
-    // setProfile(null);
-  }
+  //   // mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
+  //   // setOpenUpdate(false);
+  //   // setCover(null);
+  //   // setProfile(null);
+  // }
+  console.log("cover :", cover)
+  console.log("profile :", profile)
+ 
   return (
     <div className="update">
       <div className="wrapper">
         <h1>Update Your Profile</h1>
-        <form>
+        <form onSubmit={handleClick}>
           <div className="files">
             <label htmlFor="cover">
               <span>Cover Picture</span>
@@ -75,7 +137,9 @@ const Update = ({ setOpenUpdate, user }) => {
                   src={
                     cover
                       ? URL.createObjectURL(cover)
-                      : "/upload/" + user.coverPic
+                      : (user.coverPicture
+                ? PF + user.coverPicture
+                : PF + "user/blank.jpg")
                   }
                   alt=""
                 />
@@ -95,7 +159,9 @@ const Update = ({ setOpenUpdate, user }) => {
                   src={
                     profile
                       ? URL.createObjectURL(profile)
-                      : "/upload/" + user.profilePic
+                      : (user.profilePicture
+                ? PF + user.profilePicture
+                : PF + "user/blank.jpg")
                   }
                   alt=""
                 />
@@ -112,53 +178,64 @@ const Update = ({ setOpenUpdate, user }) => {
           <label>Description</label>
           <input
             type="text"
-            value={texts.desc}
+            value={desc}
             name="description"
-            onChange={handleChange}
+            onChange={(e) => setDesc(e.target.value)}
+            maxLength="100"
           />
           <label>Email</label>
           <input
             type="text"
-            value={texts.email}
+            value={email}
             name="email"
-            onChange={handleChange}
+           
+            disabled
           />
           <label>Password</label>
           <input
-            type="text"
-            value={texts.password}
+            type="password"
+            value={password}
             name="password"
-            onChange={handleChange}
+            onChange={(e) => setPassword(e.target.value)}
+            
           />
-          <label>Name</label>
+          <label>Password Again</label>
+          <input
+            type="password"
+            value={passwordAgain}
+            name="password"
+            ref={refe}
+            onChange={(e) => setPasswordAgain(e.target.value)}
+          />
+          {/* <label>Name</label>
           <input
             type="text"
-            value={texts.name}
+            value={name}
             name="name"
-            onChange={handleChange}
-          />
+            onChange={(e) => setName(e.target.value)}
+          /> */}
           <label>City</label>
           <input
             type="text"
             name="city"
-            value={texts.city}
-            onChange={handleChange}
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
           />
           <label>From</label>
           <input
             type="text"
-            name="website"
-            value={texts.from}
-            onChange={handleChange}
+            name="from"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
           />
           <label>Relationship Status</label>
           <input
             type="text"
-            name="website"
-            value={texts.relationship}
-            onChange={handleChange}
+            name="relationship"
+            value={relationship}
+            onChange={(e) => setRelationship(e.target.value)}
           />
-          <button onClick={handleClick}>Update</button>
+          <button type="submit" >Update</button>
         </form>
         <button className="close" onClick={() => setOpenUpdate(false)}>
           close

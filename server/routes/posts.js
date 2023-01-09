@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Post = require("../models/Post");
+const { castObject } = require("../models/User");
 const User = require("../models/User");
 
 //create a post
@@ -13,6 +14,26 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+//make a comment
+router.post("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { value } = req.body;
+
+    try{
+    const post = await PostMessage.findById(id);
+
+    // post.comments.push(value);
+      await post.updateOne({ $push: { comment: req.body.userId } });
+      res.status(200).json("The comment has been sent");
+
+    } catch(e){
+      res.status(500).json(e)
+    }
+
+    
+}
+;
 
 //update a post
 router.put("/:id", async (req, res) => {
@@ -37,13 +58,13 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
-    if (req.body.userId === post.userId) 
-    //If the user is same as the one who uploaded the post then
-    {
+    // console.log(post)
+    if (post.userId !== req.body.userId) {
       await post.deleteOne();
-      res.status(200).json("The post has been deleted :)");
+      res.status(200).json("the post has been deleted");
+      
     } else {
-      res.status(403).json("You can delete only your post :/");
+      res.status(403).json("you can delete only your post");
     }
   } catch (err) {
     res.status(500).json(err);
