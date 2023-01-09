@@ -149,7 +149,7 @@ const Rightbar = ({ user }) => {
   const ProfileRightbar = () => {
     return (
       <>
-      {user.username !== currentUser.username && (
+      {user._id !== currentUser._id && (
         <button className="rightbarFollowButton" onClick={handleClick}>
           {followed ? "Unfollow" : "Follow"}
           {followed ? <Remove/> : <Add/>}
@@ -171,24 +171,20 @@ const Rightbar = ({ user }) => {
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">Relationship:</span>
             <span className="rightbarInfoValue">
-              {user.relationship === 1
-                ? "Single"
-                : user.realtionship === 2
-                ? "Commited"
-                : "-"}
+              {user.relationship}
             </span>
           </div>
           <div className="up" style={{display:"flex",alignItems:"center",gap:"3.5rem"}}>
 
 
-          {user.username === currentUser.username && (
+          {user._id === currentUser._id && (
         <button className="rightbarFollowButton" onClick={()=>setupdated(true)}>
           Update
          
         </button>
       )}
 
-      {user.username === currentUser.username && (
+      {user._id === currentUser._id && (
         <button className="rightbarFollowButton" onClick={logout}>
       Logout
          

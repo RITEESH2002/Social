@@ -9,7 +9,7 @@ const Message = ({message, own}) => {
   return (
     <div className={own ? "message own" : "message"}>
         <div className="messtop">
-            <img src={user?.profilePicture ? user.profilePicture : PF+"/user/blank.jpg"} alt="userimg" className='messaimg'/>
+            <img src={PF+"/user/blank.jpg"} alt="userimg" className='messaimg'/>
             <p className="messtext">
                 {message.text}
             </p>

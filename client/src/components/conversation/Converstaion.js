@@ -24,7 +24,7 @@ function Conversation({conversation, currentUser}) {
   // console.log(user)
   return (
     <div className='conv'> 
-      <img src={user?.profilePicture ? user.profilePicture : PF+"/user/blank.jpg"} alt="userimg" 
+      <img src={user?.profilePicture ? PF + user.profilePicture : PF+"/user/blank.jpg"} alt="userimg" 
         className='convimg'
       />
       <span className='convname'>{user?.username}</span>

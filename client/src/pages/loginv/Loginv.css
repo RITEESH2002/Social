@@ -89,3 +89,16 @@
       cursor: pointer;
   }
 
+@media screen and (max-width:975px)
+{
+  .loginWrapper{
+    flex-direction:column;
+    height:150%;
+    padding:40px;
+    border:none;
+
+  }
+  .loginLeft{
+    margin-bottom:70px
+  }
+}
