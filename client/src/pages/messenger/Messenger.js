@@ -30,6 +30,7 @@ function Messenger() {
   // }, [])
 
   const converHandler = async () => {
+    
     await axios.post("/conversations", {senderId: user._id, receiverId: searchUser._id})
     window.location.reload()
   }
