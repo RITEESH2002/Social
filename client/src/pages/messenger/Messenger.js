@@ -184,7 +184,7 @@ useEffect(()=>{
       <div className="messenger">
         <div className="chatmenu">
           <div className="menuwrap" style={{ color: "white" }}>
-            <input className="search" placeholder="search your friends" 
+            <input className="search" placeholder="Add people for conversation" 
               onChange={(e) => setSearchUser(e.target.value)}
               // value={searchUser}
               onKeyDown={handleKeyPress}

@@ -68,7 +68,7 @@ function Topbar() {
             />
           </div>
           {searchUser ? (
-            <div className="divi">
+            <div className="divii">
             <NavLink to = {`/profile/${searchUser.username}`}>
               <div className="searchText">{searchUser.username}</div>
               </NavLink>
@@ -77,29 +77,8 @@ function Topbar() {
             <></>
           )}
         </div>
-        <div className="topbarRight">
-          <div className="topbarLinks">
-            <NavLink to="/">
-              <span className="topbarLink">Homepage</span>
-            </NavLink>
-
-            <span className="topbarLink">Timeline</span>
-          </div>
-          <div className="topbarIcons">
-            <div className="topbarIconItem">
-              <PersonIcon style={{ color: "white" }} />
-              <span className="topbarIconBadge">1</span>
-            </div>
-            <div className="topbarIconItem">
-              <ChatIcon style={{ color: "white" }} />
-              <span className="topbarIconBadge">1</span>
-            </div>
-            <div className="topbarIconItem">
-              <NotificationsActiveIcon style={{ color: "white" }} />
-              <span className="topbarIconBadge">1</span>
-            </div>
-          </div>
           <Link to={`/profile/${user.username}`}>
+        <div className="topbarRight">
             <img
               src={
                 user.profilePicture
@@ -109,8 +88,9 @@ function Topbar() {
               alt="user"
               className="topbarImg"
             />
-          </Link>
+          <span className="textRight">{user.username}</span>
         </div>
+          </Link>
 
 
         <div className="gpt3__navbar-menu">
