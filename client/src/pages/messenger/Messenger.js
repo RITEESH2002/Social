@@ -212,7 +212,7 @@ useEffect(()=>{
                 <div className="chattop" style={{ overflowY: "scroll" }}>
                   {messages.map((m)=>(
                     <div ref={scrollRef}>
-                      <Message message={m} own={m.sender === user._id}/>
+                      <Message message={m} own={m.sender === user._id} />
                     </div>
                   ))}
                 </div>

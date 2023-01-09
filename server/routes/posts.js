@@ -17,23 +17,41 @@ router.post("/", async (req, res) => {
 
 //make a comment
 router.post("/:id", async (req, res) => {
-    const { id } = req.params;
-    const { value } = req.body;
 
-    try{
-    const post = await PostMessage.findById(id);
+  //   const { value } = req.body;
 
-    // post.comments.push(value);
-      await post.updateOne({ $push: { comment: req.body.userId } });
-      res.status(200).json("The comment has been sent");
+  //   try{
+  //     const post = await Post.findById(req.params.id); 
+  //     const currentUser = await User.findById(req.body.userId); // riteesh
 
-    } catch(e){
-      res.status(500).json(e)
-    }
+  //   // post.comments.push(value);
+  //     await post.updateOne({ $push: { comment: {req.body.userId, req.body.value} } });
+  //     res.status(200).json("The comment has been sent");
 
+  //   } catch(e){
+  //     res.status(500).json(e)
+  //   }
+  // try{
+  //     const user = await User.findById(req.params.id); // praveen
+  //     const currentUser = await User.findById(req.body.userId); // riteesh
+  //     if(!user.followers.includes(req.body.userId)) 
+  //     // if riteesh not in praveens followers
+  //     {
+  //       await user.updateOne({$push: { followers: req.body.userId}})
+  //       // add riteesh in praveens followers
+  //       await currentUser.updateOne({$push: {following: req.params.id}})
+  //       // add praveen in riteeshs following
+  //       res.status(200).json("User has been followed");
+  //     }
+  //     else {
+  //       res.status(403).json("You already follow this user")
+  //     }
+  //   } catch(err){
+  //     res.status(500).json(err);
+  //   }
     
-}
-;
+});
+
 
 //update a post
 router.put("/:id", async (req, res) => {

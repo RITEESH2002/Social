@@ -10,7 +10,7 @@ import axios from "axios";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 
-export default function Post({ post }) {
+export default function Post({ post, username }) {
   const[com,setcom]=useState(false);
   const [like, setLike] = useState(post.likes.length);
   const [isLiked, setIsLiked] = useState(false);
@@ -70,7 +70,11 @@ export default function Post({ post }) {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <DeleteIcon style={{cursor: "pointer"}} onClick={handleDelete}/>
+          {
+            username ? 
+            <DeleteIcon style={{cursor: "pointer"}} onClick={handleDelete}/>:
+            <MoreVert /> 
+          }
           </div>
         </div>
         <div className="postCenter">
@@ -94,12 +98,12 @@ export default function Post({ post }) {
             <span className="postLikeCounter">{like} people like it</span>
           </div>
           <div className="postBottomRight">
-            <span className="postCommentText" onClick={()=>setcom(!com)}>{post.comment} comments</span>
+            {/* <span className="postCommentText" onClick={()=>setcom(!com)}>comments</span> */}
           </div>
         </div>
       </div>
       {
-        com && <Comment post={post}/>
+        com && <Comment />
       }
     </div>
   );
