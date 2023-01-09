@@ -19,6 +19,7 @@ function Messenger() {
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [onlineUsers, setOnlineUsers] = useState([]);
+  const [searchUser, setSearchUser] = useState("");
   const { user } = useContext(AuthContext);
   const socket = useRef();
   const scrollRef = useRef();
@@ -27,6 +28,22 @@ function Messenger() {
   // useEffect(()=>{
   //   setSocket(io("ws://localhost:8900"))
   // }, [])
+
+  const converHandler = async () => {
+    await axios.post("/conversations", {senderId: user._id, receiverId: searchUser._id})
+    window.location.reload()
+  }
+  const handleKeyPress = async (event) => {
+    if (event.key === "Enter") {
+      console.log(searchUser);
+      try{
+        const res = await axios("/users?username=" + searchUser);
+        setSearchUser(res.data);
+      }catch(e){
+        console.log(e)
+      }
+    }
+  };
 
 useEffect(()=>{
   socket.current=io("ws://localhost:8900");
@@ -166,7 +183,21 @@ useEffect(()=>{
       <div className="messenger">
         <div className="chatmenu">
           <div className="menuwrap" style={{ color: "white" }}>
-            <input className="search" placeholder="search your friends" />
+            <input className="search" placeholder="search your friends" 
+              onChange={(e) => setSearchUser(e.target.value)}
+              // value={searchUser}
+              onKeyDown={handleKeyPress}
+            />
+            {searchUser ? (
+            <div className="divi">
+            
+              <div className="searchText" onClick={converHandler} style={{cursor:"pointer"}}>{searchUser.username}</div>
+             
+            </div>
+          ) : (
+            <></>
+          )}
+
             {conversation.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
                 <Conversation conversation={c} currentUser={user} />
