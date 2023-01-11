@@ -194,7 +194,7 @@ const Rightbar = ({ user }) => {
         </div>
         
           {
-            upadted && <Update setOpenUpdate={setupdated} user={user} />
+            upadted && <Update setOpenUpdate={setupdated} user = {user} />
             
             }
 
