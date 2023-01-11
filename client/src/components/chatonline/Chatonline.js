@@ -22,6 +22,8 @@ function Chatonline({onlineUsers,currentId,setCurrentChat}) {
   useEffect(() => {
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
   }, [friends, onlineUsers]);
+console.log(onlineUsers)
+
 
   const handleClick = async (user) => {
     try {
@@ -34,6 +36,7 @@ function Chatonline({onlineUsers,currentId,setCurrentChat}) {
     }
   };
 
+  
 
   return (
     <div className='chatOnline'>
@@ -43,7 +46,9 @@ function Chatonline({onlineUsers,currentId,setCurrentChat}) {
 
         <div className="chatOnlineFriend" onClick={()=>handleClick(o)}>
             <div className="img">
-                <img src={`${PF}ai.png`} alt="user" className='imageuser'/>
+                <img src={ o?.profilePicture
+                  ? PF + o.profilePicture
+                  : PF + "person/noAvatar.png"} alt="user" className='imageuser'/>
                 <div className='userbadge'></div>
             </div>
             <span className='name'>{o?.username}</span>
