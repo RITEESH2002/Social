@@ -7,7 +7,7 @@ import "./Home.css"
 function Home() {
   return (
    <>
-    <Topbar/>
+    <Topbar />
     <div className="homeContainer">
       <Sidebar/>
       <Feed/>

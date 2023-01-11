@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Topbar.css";
 import { RiMenu3Line, RiCloseLine } from "react-icons/ri";
 import SearchIcon from "@mui/icons-material/Search";
@@ -14,6 +14,7 @@ import axios from "axios";
 function Topbar() {
   const[toggleMenu,setToggleMenu]=useState(false);
   const[upadted,setupdated]=useState(false);
+
   const { user } = useContext(AuthContext);
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   const [searchUser, setSearchUser] = useState("");
@@ -113,19 +114,6 @@ function Topbar() {
           </div>
           <div className="gpt3__navbar-menu_container-links-sign">
           <button type="button">
-
-
-          <Link to={`/profile/${user.username}`}>
-            <img
-              src={
-                user.profilePicture
-                  ? PF + user.profilePicture
-                  : PF + "user/blank.jpg"
-              }
-              alt="user"
-              className="topbarImgs"
-            />
-          </Link>
           </button>
      
             <button type="button" onClick={logout} style={{marginTop:"6px"}}>Logout</button>
