@@ -73,6 +73,7 @@ function Messenger() {
       );
     });
   }, [user]);
+  console.log(onlineUsers)
 
   // useEffect(()=>{
   //   socket?.on("welcome", message=>{
@@ -92,7 +93,7 @@ function Messenger() {
     getConversations();
   }, [user._id]);
 
-  console.log(currentChat);
+  // console.log(currentChat);
 
   useEffect(() => {
     const getMessages = async () => {
@@ -137,7 +138,7 @@ function Messenger() {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  console.log(messages);
+  // console.log(messages);
   return (
     <>
       <div

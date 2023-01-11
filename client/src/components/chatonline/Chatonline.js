@@ -16,15 +16,18 @@ function Chatonline({onlineUsers,currentId,setCurrentChat}) {
 
     getFriends();
   }, [currentId]);
- console.log(friends)
+//  console.log(friends)
+
 
  
+console.log(onlineUsers);
+
   useEffect(() => {
     setOnlineFriends(friends.filter((f) => onlineUsers.includes(f._id)));
-  }, [friends, onlineUsers]);
-console.log(onlineUsers)
+  }, [friends]);
+  console.log(onlineFriends);
 
-
+  
   const handleClick = async (user) => {
     try {
       const res = await axios.get(
@@ -41,7 +44,7 @@ console.log(onlineUsers)
   return (
     <div className='chatOnline'>
 {
-  onlineFriends.map((o)=>{
+  onlineFriends.map((o)=>(
 
 
         <div className="chatOnlineFriend" onClick={()=>handleClick(o)}>
@@ -53,7 +56,7 @@ console.log(onlineUsers)
             </div>
             <span className='name'>{o?.username}</span>
         </div>
-  })
+  ))
 }
 
       

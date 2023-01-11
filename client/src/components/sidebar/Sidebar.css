@@ -1,5 +1,5 @@
 .sidebar {
-    flex: 2.1;
+    flex: 1.6;
     height: calc(100vh - 60px);
     overflow-y: scroll;
     position: sticky;

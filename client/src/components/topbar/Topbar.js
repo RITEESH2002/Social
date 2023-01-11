@@ -10,7 +10,7 @@ import logo from "../../VConnectfinal.svg";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
-
+import User from "../../lottie/User"
 function Topbar() {
   const[toggleMenu,setToggleMenu]=useState(false);
   const[upadted,setupdated]=useState(false);
@@ -78,16 +78,8 @@ function Topbar() {
           )}
         </div>
           <Link to={`/profile/${user.username}`}>
-        <div className="topbarRight">
-            <img
-              src={
-                user.profilePicture
-                  ? PF + user.profilePicture
-                  : PF + "user/blank.jpg"
-              }
-              alt="user"
-              className="topbarImg"
-            />
+        <div className="topbarRight" >
+            <User/>
           <span className="textRight">{user.username}</span>
         </div>
           </Link>

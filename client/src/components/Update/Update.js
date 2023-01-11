@@ -21,7 +21,7 @@ const Update = ({ setOpenUpdate, user }) => {
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
  
   const handleClick = async (e) => {
-    // e.preventDefault();
+    e.preventDefault();
     if(passwordAgain !== password){
       refe.current.setCustomValidity("Passwords dont match!")
     } else{
@@ -68,7 +68,7 @@ const Update = ({ setOpenUpdate, user }) => {
       }
       try {
         await axios.put("/users/"+ user._id, upd);
-        // window.location.reload()
+        window.location.reload()
         // navigate('/home')
 
       } catch(err) {
@@ -121,9 +121,10 @@ const Update = ({ setOpenUpdate, user }) => {
   //   // setCover(null);
   //   // setProfile(null);
   // }
-  console.log("cover :", cover)
-  console.log("profile :", profile)
- 
+   console.log("cover :", cover)
+   console.log("profile :", profile)
+ console.log("password ", password)
+ console.log("passwordAgaiun ", passwordAgain)
   return (
     <div className="update">
       <div className="wrapper">
