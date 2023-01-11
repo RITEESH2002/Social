@@ -10,7 +10,7 @@ import logo from "../../VConnectfinal.svg";
 import { AuthContext } from "../../context/AuthContext";
 import axios from "axios";
 
-import {io} from "socket.io-client"
+import { io } from "socket.io-client";
 
 function Messenger() {
   const [conversation, setConversation] = useState([]);
@@ -30,50 +30,49 @@ function Messenger() {
   // }, [])
 
   const converHandler = async () => {
-    
-    await axios.post("/conversations", {senderId: user._id, receiverId: searchUser._id})
-    window.location.reload()
-  }
+    await axios.post("/conversations", {
+      senderId: user._id,
+      receiverId: searchUser._id,
+    });
+    window.location.reload();
+  };
   const handleKeyPress = async (event) => {
     if (event.key === "Enter") {
       console.log(searchUser);
-      try{
+      try {
         const res = await axios("/users?username=" + searchUser);
         setSearchUser(res.data);
-      }catch(e){
-        console.log(e)
+      } catch (e) {
+        console.log(e);
       }
     }
   };
 
-useEffect(()=>{
-  socket.current=io("ws://localhost:8900");
-  socket.current.on("getMessage", (data) => {
-    setArrivalMessage({
-      sender: data.senderId,
-      text: data.text,
-      createdAt: Date.now(),
-    }) ;
-  });
-},[]);
+  useEffect(() => {
+    socket.current = io("ws://localhost:8900");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
 
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
 
-useEffect(() => {
-  arrivalMessage &&
-    currentChat?.members.includes(arrivalMessage.sender) &&
-    setMessages((prev) => [...prev, arrivalMessage]);
-}, [arrivalMessage, currentChat]);
-
-
-useEffect(()=>{
-  socket.current.emit("addUser",user._id);
-  socket.current.on("getUsers",(users)=>{
-    setOnlineUsers(
-      user.following.filter((f) => users.some((u) => u.userId === f))
-    );
-  });
-},[user])
-
+  useEffect(() => {
+    socket.current.emit("addUser", user._id);
+    socket.current.on("getUsers", (users) => {
+      setOnlineUsers(
+        user.following.filter((f) => users.some((u) => u.userId === f))
+      );
+    });
+  }, [user]);
 
   // useEffect(()=>{
   //   socket?.on("welcome", message=>{
@@ -93,19 +92,19 @@ useEffect(()=>{
     getConversations();
   }, [user._id]);
 
-  console.log(currentChat)
+  console.log(currentChat);
 
-  useEffect(()=>{
+  useEffect(() => {
     const getMessages = async () => {
-      try{
-        const res = await axios.get("/messages/"+currentChat._id)
-        setMessages(res.data)
-      }catch(err){
-        console.log(err)
+      try {
+        const res = await axios.get("/messages/" + currentChat._id);
+        setMessages(res.data);
+      } catch (err) {
+        console.log(err);
       }
-    }
+    };
     getMessages();
-  },[currentChat])
+  }, [currentChat]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -113,32 +112,32 @@ useEffect(()=>{
       sender: user._id,
       text: newMessage,
       conversationId: currentChat._id,
-    }
+    };
 
     const receiverId = currentChat.members.find(
       (member) => member !== user._id
     );
- 
+
     socket.current.emit("sendMessage", {
       senderId: user._id,
       receiverId,
       text: newMessage,
     });
 
-    try{
+    try {
       const res = await axios.post("/messages", message);
-      setMessages([...messages, res.data])
-      setNewMessage("")
-    }catch(e){
-      console.log(e)
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+    } catch (e) {
+      console.log(e);
     }
-  }
+  };
 
-  useEffect(()=>{
-    scrollRef.current?.scrollIntoView({behavior: "smooth"})
-  },[messages])
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
 
-  console.log(messages)
+  console.log(messages);
   return (
     <>
       <div
@@ -184,20 +183,26 @@ useEffect(()=>{
       <div className="messenger">
         <div className="chatmenu">
           <div className="menuwrap" style={{ color: "white" }}>
-            <input className="search" placeholder="Add people for conversation" 
+            <input
+              className="search"
+              placeholder="Add people for conversation"
               onChange={(e) => setSearchUser(e.target.value)}
               // value={searchUser}
               onKeyDown={handleKeyPress}
             />
             {searchUser ? (
-            <div className="divi">
-            
-              <div className="searchText" onClick={converHandler} style={{cursor:"pointer"}}>{searchUser.username}</div>
-             
-            </div>
-          ) : (
-            <></>
-          )}
+              <div className="divi">
+                <div
+                  className="searchText"
+                  onClick={converHandler}
+                  style={{ cursor: "pointer" }}
+                >
+                  {searchUser.username}
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
 
             {conversation.map((c) => (
               <div onClick={() => setCurrentChat(c)}>
@@ -211,7 +216,7 @@ useEffect(()=>{
             {currentChat ? (
               <>
                 <div className="chattop" style={{ overflowY: "scroll" }}>
-                  {messages.map((m)=>(
+                  {messages.map((m) => (
                     <div ref={scrollRef}>
                       <Message message={m} own={m.sender === user._id} />
                     </div>
@@ -221,10 +226,12 @@ useEffect(()=>{
                   <textarea
                     className="type"
                     placeholder="Write to send"
-                    onChange={(e)=> setNewMessage(e.target.value)}
+                    onChange={(e) => setNewMessage(e.target.value)}
                     value={newMessage}
                   ></textarea>
-                  <button className="send" onClick={handleSubmit}>Send</button>
+                  <button className="send" onClick={handleSubmit}>
+                    Send
+                  </button>
                 </div>
               </>
             ) : (
@@ -236,12 +243,11 @@ useEffect(()=>{
         </div>
         <div className="chatonl">
           <div className="onlwrap" style={{ color: "white" }}>
-          <Chatonline
+            <Chatonline
               onlineUsers={onlineUsers}
               currentId={user._id}
               setCurrentChat={setCurrentChat}
             />
-            
           </div>
         </div>
       </div>

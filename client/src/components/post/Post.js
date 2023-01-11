@@ -71,7 +71,7 @@ export default function Post({ post, username }) {
           </div>
           <div className="postTopRight">
           {
-            username ? 
+            (username && (user._id === currentUser._id)) ? 
             <DeleteIcon style={{cursor: "pointer"}} onClick={handleDelete}/>:
             <MoreVert /> 
           }

@@ -1,5 +1,6 @@
 .rightbar {
-    flex: 3.5;
+  margin-top: 50px;
+    flex: 2;
     margin-left: 18px;
     height: calc(100vh - 60px);
     overflow-y: scroll;

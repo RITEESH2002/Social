@@ -35,16 +35,16 @@ const Sidebar = () => {
         </li>
 
         </NavLink>
-      <hr className="sidebarHr" /> 
-        
         <NavLink to ="/news">
 
-        <li className="sidebarListItem">
-          
-          <span className="sidebarListItemText">News➡️</span>
-          <Newslo />
-        </li>
-        </NavLink>
+<li className="sidebarListItem" style={{listStyle:"none"}}>
+
+<span className="sidebarListItemText">News➡️</span>
+<Newslo />
+</li>
+</NavLink>
+        
+     
         
       </ul>
       
