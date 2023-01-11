@@ -17,7 +17,7 @@ function Profile() {
   const PF =  process.env.REACT_APP_PUBLIC_FOLDER
   const [user, setUser] = useState({});
   const params = useParams()
-
+  
   useEffect(()=>{
     const fetchUser = async () => {
       const res = await axios.get(`/users?username=${params.username}`)
@@ -32,7 +32,7 @@ function Profile() {
 
 
     <div style={{color:"white"}}>
-      <Topbar/>
+      <Topbar />
       <div className="profile">
       <Sidebar/>
       <div className="profileRight">
