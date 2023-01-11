@@ -1,17 +1,21 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Update.css";
 
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import axios from "axios";
+import { AuthContext } from "../../context/AuthContext";
 
 const Update = ({ setOpenUpdate, user }) => {
+
+  // const {user} = useContext(AuthContext)
+
   const [cover, setCover] = useState("");
   const [profile, setProfile] = useState("");
   const [desc, setDesc] = useState(user.desc) 
   const [name, setName] = useState(user.username) 
-  const [password, setPassword] = useState(user.password) 
-  const [passwordAgain, setPasswordAgain] = useState(user.password) 
+  const [password, setPassword] = useState("") 
+  const [passwordAgain, setPasswordAgain] = useState("") 
   const [city, setCity] = useState(user.city) 
   const [from, setFrom] = useState(user.from) 
   const [relationship, setRelationship] = useState(user.relationship) 
@@ -19,11 +23,16 @@ const Update = ({ setOpenUpdate, user }) => {
   const refe = useRef()
   const navigate = useNavigate();
   const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+  const password1 = useRef();
+  const passwordAgain1 = useRef();
+  // console.log(user)
+  
  
   const handleClick = async (e) => {
     e.preventDefault();
-    if(passwordAgain !== password){
-      refe.current.setCustomValidity("Passwords dont match!")
+    // window.location.reload();
+    if(passwordAgain1.current.value !== password1.current.value){
+      passwordAgain1.current.setCustomValidity("Passwords dont match!")
     } else{
       
       const upd = {
@@ -195,7 +204,8 @@ const Update = ({ setOpenUpdate, user }) => {
           <label>Password</label>
           <input
             type="password"
-            value={password}
+            // value={password}
+            ref={password1}
             name="password"
             onChange={(e) => setPassword(e.target.value)}
             
@@ -203,9 +213,9 @@ const Update = ({ setOpenUpdate, user }) => {
           <label>Password Again</label>
           <input
             type="password"
-            value={passwordAgain}
+            // value={passwordAgain}
             name="password"
-            ref={refe}
+            ref={passwordAgain1}
             onChange={(e) => setPasswordAgain(e.target.value)}
           />
           {/* <label>Name</label>

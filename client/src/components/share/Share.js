@@ -3,6 +3,7 @@ import "./Share.css";
 import { PermMedia, Sell, Room, AddReaction, Send, Cancel } from "@mui/icons-material";
 import { AuthContext } from "../../context/AuthContext";
 import { Navigate } from "react-router-dom";
+import Sharel from "../../lottie/Sharel"
 // import share from "../../assets/ai.png"
 import axios from "axios";
 const Share = () => {
@@ -42,7 +43,7 @@ const Share = () => {
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img
+          {/* <img
             className="shareProfileImg"
             src={
               user.profilePicture
@@ -50,7 +51,9 @@ const Share = () => {
                 : PF + "user/blank.jpg"
             }
             alt="share"
-          />
+          /> */}
+
+          <Sharel/>
           <input
             placeholder={`Whats on your mind ${user.username} ?`}
             className="shareInput"
